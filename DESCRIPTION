@@ -1,0 +1,13 @@
+Package: rhubctrl
+Title: Manage an Instance of 'r-hub'
+Version: 1.0.0
+Author: Gabor Csardi
+Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
+Description: Deploy and manage and installation of r-hub, a CI environment for R packages.
+License: MIT + file LICENSE
+LazyData: true
+URL: https://github.com/r-hub/rhubctrl
+BugReports: https://github.com/r-hub/rhubctrl/issues
+RoxygenNote: 5.0.1
+Suggests: 
+    testthat
