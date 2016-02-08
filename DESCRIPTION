@@ -11,3 +11,8 @@ BugReports: https://github.com/r-hub/rhubctrl/issues
 RoxygenNote: 5.0.1
 Suggests: 
     testthat
+Imports:
+    base64enc,
+    secure
+Remotes:
+    hadley/secure
