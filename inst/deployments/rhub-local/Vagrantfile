@@ -8,6 +8,7 @@ RHUB_IP = ENV["RHUB_IP"] || "10.0.0.2"
 LINUX_IP = ENV["LINUX_IP"] || "10.0.0.3"
 FORWARDED_PORT = (ENV["FORWARDED_PORT"] || '8080').to_i
 PUBLIC_KEY_PATH = "#{Dir.home}/.ssh/id_rsa.pub"
+JENKINS_PASSWORD = ENV["JENKINS_PASSWORD"] || "2eea3b927d4ee23e"
 
 Vagrant::configure("2") do |config|
   config.ssh.forward_agent = true
@@ -30,9 +31,14 @@ Vagrant::configure("2") do |config|
   end
 
   config.vm.define "linux" do |vm|
+    env = {
+      RHUB_IP: "#{RHUB_IP}",
+      JENKINS_PASSWORD: "#{JENKINS_PASSWORD}"
+    }
     vm.vm.hostname = "linux.#{RHUB_DOMAIN}"
     vm.vm.network :private_network, ip: LINUX_IP
-    vm.vm.provision :shell, :path => "linux.sh"
+    vm.vm.provision "file", source: "swarm.conf", destination: "swarm.conf"
+    vm.vm.provision "shell", path: "linux.sh", env: env
   end
 
   if Pathname.new(PUBLIC_KEY_PATH).exist?

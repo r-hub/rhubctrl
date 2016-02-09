@@ -13,7 +13,10 @@ sudo DOKKU_TAG=v0.4.13 bash bootstrap.sh
 echo ${RHUB_DOMAIN:-rhub.me} > /home/dokku/VHOST
 sudo cat /root/.ssh/id_rsa.pub | sshcommand acl-add dokku root
 
-## Plugins
+## Plugins, we pre-configure the Jenkins plugin with the password
+
+mkdir -p /var/lib/dokku/services/jenkins/
+echo password > /var/lib/dokku/services/jenkins/PASSWORD
 
 sudo dokku plugin:install https://github.com/dokku/dokku-rabbitmq.git rabbitmq
 sudo dokku plugin:install https://github.com/r-hub/dokku-jenkins.git jenkins
